@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>MyPresentation</title>
+	<meta name="description" content="MyPresentation">
+	<meta name="author" content="JLVZ">
+	<meta name="generator" content="slidify" />
+	
+	<!-- LOAD STYLE SHEETS -->
+	<link rel="stylesheet" href="libraries/frameworks/html5slides/default/styles.css">
+	<link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />  <link rel="stylesheet" href = "assets/css/ribbons.css">
+  
+</head>
+<body style='display: none'>
+	<section class='slides layout-regular template-regular'>
+     <article class="" id="slide-1" style="background:;">
+  <h3>VaR and TVaR sample estimation for compound distributions</h3>
+  <ol>
+<li>VaR and TVaR risk measures.</li>
+<li>Compound distributions as risk models in insurance (1), (2). </li>
+<li>Estimation of  VaR and TVaR for compound distributions.</li>
+<li>Functionning of our shiny app.</li>
+</ol>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>VaR and TVaR risk measures.</h3>
+  <p>Let be \(X\ge0\) a random variable representing a loss.
+Given its cumulative distribution function (cdf) \(F_X(x)\)
+the Value at Risk (VaR) and Tail Value at risk (TVaR) at some probability level \(p\in [0,1]\) are respectively\[VaR[X,p]=F_X^{-1}(p)\] 
+\[TVaR[X,p]=\frac{1}{1-p}\int_{p}^{1}VaR[X,\xi]d\xi \]
+For a given \(p\in [0,1]\) both functions associate to the cdf \(F_X(x)\) real numbers representing   the loss (in monetary units) at the \(p\)-level. In that sense thay are measuring the risk associated to the r.v. (loss) \(X\). 
+That&#39;s why they are called &quot;RISK MEASURES&quot;</p>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>Compound distributions as risk models in insurance (1)</h3>
+  <p>Now suppose that the r.v. \(X\) is representing the loss in a one year general insurance policy. 
+How can we model the future random loss associated to that contract?
+There will clearly exist two random sources: </p>
+
+<ol>
+<li><p>The random claims number of the policy:</p>
+
+<p>Let be \(N\in \{0,1,2,...\}\) the random variable representing the claim number during the year.</p></li>
+<li><p>The severities of the policy claims:</p>
+
+<p>Let \(\{X_i\}_{i=1}^{\infty}\) be a sequence of i.i.d. r.v. (\(X_i\ge0\)) representing the claims severities.</p></li>
+<li><p>Assume that the r.v. \(N\) and \(\{X_i\}_{i=1}^{\infty}\) are mutually independent.</p></li>
+</ol>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>Compound distributions as risk models in insurance (1)</h3>
+  <p>Now suppose that the r.v. \(X\) is representing the loss in a one year general insurance policy. 
+How can we model the future random loss associated to that contract?
+There will clearly exist two random sources: </p>
+
+<ol>
+<li><p>The random claims number of the policy:</p>
+
+<p>Let be \(N\in \{0,1,2,...\}\) the random variable representing the claim number during the year.</p></li>
+<li><p>The severities of the policy claims:</p>
+
+<p>Let \(\{X_i\}_{i=1}^{\infty}\) be a sequence of i.i.d. r.v. (\(X_i\ge0\)) representing the claims severities.</p></li>
+<li><p>Assume that the r.v. \(N\) and \(\{X_i\}_{i=1}^{\infty}\) are mutually independent.</p></li>
+</ol>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>Compound distributions as risk models in insurance (2)</h3>
+  <p>Then the total loss of the policy is a compound random variable:</p>
+
+<p>\(S=\sum_{k=1}^N X_{i}\)   if   \(N>0\)   ,   \(S=0\)  if  \(N=0\)</p>
+
+<p>Now suppose \(p_n=P\{N=n\}\) and \(V_X(x)\) are respectively the cdf&#39;s for \(N\) and \(X\).</p>
+
+<p>The cdf of the total loss is a compound distribution 
+\[F_S(s)=P\{S\le s\}=\sum_{n=0}^{\infty} p_n V_X^{*(n)}(s)\]</p>
+
+<p>where \(^*(n)\) stands for the n-fold convolution product.</p>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>Estimation of  VaR and TVaR for compound distributions.</h3>
+  <p>Now looking to the symbolic formula for a compound cdf it is clear that it is not that easy to handle. Probabilities or quantiles calculations are in general hard to achieve. There are in fact different approaches to overcome these issues: recursive algorithms, approximations, fast Fourier transform, etc...</p>
+
+<p>In our Shiny App we illustrate the estimation of VaR and TVaR by means of simulation and sample estimation. </p>
+
+<p>We fix the \(p_n\) distribution as a Poisson \(P(\lambda)\) distribution, and the \(X\) as Gamma\((\alpha,\beta)\).</p>
+
+<p>User has to choose the three parameters: \(\lambda >0\),\(\alpha>\),\(\beta>0\), the number of simulations for the compound variable \(S\), the probability level \(p\in [0.05,0.995]\) and a simulation seed.</p>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>Estimation of  VaR and TVaR for compound distributions (2).</h3>
+  <p>Our shiny App performs the following steps:</p>
+
+<ol>
+<li><p>Simulate a sample of total losses \(S\).</p></li>
+<li><p>Calculate the corresponding samples estimates for VaR and TVaR.</p></li>
+<li><p>Plot the sample histogram together with the two estimated risk measures values.</p></li>
+</ol>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>This is the end</h3>
+  <p>Thank you for reading these slides!</p>
+
+</article>
+
+  </section>
+</body>
+  <!-- LOAD JAVASCRIPTS  -->
+	<script src='libraries/frameworks/html5slides/default/slides.js'></script>
+	<!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    tex2jax: {
+	      inlineMath: [['$','$'], ['\\(','\\)']],
+	      processEscapes: true
+	    }
+	  });
+	</script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script> -->
+	<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+	<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+	 
+	</html>
